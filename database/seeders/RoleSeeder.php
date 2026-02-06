@@ -18,13 +18,18 @@ class RoleSeeder extends Seeder
         $roleArray = ['admin', 'viewer', 'project_manager'];
         foreach ($roleArray as $role) {
             Role::create([
-                'name'=> $role
+                'name' => $role
             ]);
         }
 
         $users = User::all();
         foreach ($users as $user) {
-            $user->roles()->sync(Role::inRandomOrder()->pluck("id")->first());
+            if ($user->id == 1) {
+                $user->roles()->sync([1]);
+            } else {
+                $user->roles()->sync(Role::inRandomOrder()->pluck("id")->first());
+            }
+
         }
     }
 }

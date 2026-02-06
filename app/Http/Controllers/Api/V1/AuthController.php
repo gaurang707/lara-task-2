@@ -70,9 +70,8 @@ class AuthController extends Controller
             $viewerRole = Role::where("name", 'viewer')->first()->id;
             $user->roles()->attach($viewerRole);
         }
+        
         //assign default role to user
-
-
         return $this->success($user, 'User registered successfully');
     }
 
